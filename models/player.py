@@ -78,3 +78,8 @@ class Player:
             players8.append(dict_players)
 
         return players8
+
+    @staticmethod
+    def all_players_database():
+        players = player_table.all()
+        return players

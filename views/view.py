@@ -3,6 +3,7 @@
 
 from models.player import Player
 from models.tournament import Tournament
+from terminaltables import SingleTable
 
 HOME_PIC =  "\n   |\\_\n  /  .\\_\n |   ___)     CHESS TOURNAMENT\n |    \\\n |  =  |\n /_____\\\n[_______]\n"
 
@@ -126,6 +127,29 @@ class View:
     @staticmethod
     def reports_menu():
         print("\n"*20)
-        print(REPORTS_MENU)
-        
+        for line in REPORTS_MENU:
+            print(line)
+        choice = input("choose an action : ")
+        return choice
 
+    @staticmethod    
+    def all_players(players_name, players_rank):
+        title_all_p = 'ALL PLAYERS BY NAME'    
+        title_all_p_rank = 'ALL PLAYERS BY RANK'
+        data_p = [['Name', 'Fist Name', 'Birth date', 'Sex', 'Rank'],]
+        data_r = [['Name', 'Fist Name', 'Birth date', 'Sex', 'Rank'],]
+        for line in players_name:
+            data_p.append(line.save_rep())   
+        table1 = SingleTable(data_p, title_all_p)
+        print("\n")
+        print(table1.table)
+        print("\n")
+
+        for line in players_rank:
+            data_r.append(line.save_rep())
+        table2 = SingleTable(data_r, title_all_p_rank)
+        print(table2.table)
+        print("\n")    
+        print("Enter 0 to return")
+        choice = input("choose an action : ")
+        return choice    

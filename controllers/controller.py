@@ -9,15 +9,8 @@ from controllers.tournament_controller import Tournament_controller
 class Controller:
 
     def __init__(self):
-        # self.lastTournament = None
+        
         pass
-
-
-    # def basicMenu(self):
-    #     if self.lastTournament is not None:
-    #         self.displayTournamentMenu()
-    #     else:
-    #         self.start()
 
     @staticmethod
     def start():
@@ -78,6 +71,14 @@ class Controller:
     
     @staticmethod
     def reports_menu():
+        choices = {
+            "1" : "all_players",
+            "2" : "play_tournament_controller",
+            "0" : "start"
+        }
+        choice = View.reports_menu()
+        func = getattr(Controller, choices[choice])
+        func()
         pass
 
     @staticmethod
@@ -128,7 +129,6 @@ class Controller:
             Controller.manage_tournament_controller()
             
                 
-
     @staticmethod
     def play_round(choice):
         play_tournament = Tournament_controller(choice)
@@ -139,6 +139,20 @@ class Controller:
             Controller.manage_tournament_controller()
         if next == 1:
             play_tournament.round()
+
+    @staticmethod
+    def all_players():
+        all_players = Player.all_players_database()
+        list_players = []
+        for line in all_players:
+            player = Player(line['name'], line['first_name'], line['birth_date'], line['sex'], line['rank'])
+            list_players.append(player)
+
+        sort_players_name = sorted(list_players, key=lambda t: t.name)
+        sort_players_rank = sorted(list_players, key=lambda t: t.rank)
+
+        choice = View.all_players(sort_players_name, sort_players_rank)
+
 
             
 
