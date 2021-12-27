@@ -73,7 +73,7 @@ class Controller:
     def reports_menu():
         choices = {
             "1" : "all_players",
-            "2" : "play_tournament_controller",
+            "2" : "all_players_in_tournament",
             "0" : "start"
         }
         choice = View.reports_menu()
@@ -152,6 +152,14 @@ class Controller:
         sort_players_rank = sorted(list_players, key=lambda t: t.rank)
 
         choice = View.all_players(sort_players_name, sort_players_rank)
+
+
+    @staticmethod
+    def all_players_in_tournament():
+        choice = View.choose_tournament_view()
+        tr = Tournament.get_tournament(choice)
+        View.all_players_in_tournament(tr)
+
 
 
             

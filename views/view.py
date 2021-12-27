@@ -152,4 +152,26 @@ class View:
         print("\n")    
         print("Enter 0 to return")
         choice = input("choose an action : ")
-        return choice    
+        return choice
+
+    @staticmethod
+    def all_players_in_tournament(tournament):
+        title_all_p = "ALL PLAYERS IN TOURNAMENT BY NAME"
+        title_all_p_rank = "ALL PLAYERS IN TOURNAMENT BY RANK"
+        data_p = [['Name', 'Fist Name', 'Birth date', 'Sex', 'Rank'],]
+        data_r = [['Name', 'Fist Name', 'Birth date', 'Sex', 'Rank'],]
+        for line in tournament.sort_player_name():
+            data_p.append(line.save_rep())
+        table1 = SingleTable(data_p, title_all_p)
+        print("\n")
+        print('Tournament: '+tournament.name)
+        print("\n")
+        print(table1.table) 
+        print("\n")
+
+        for line in tournament.sort_player_rank():
+            data_r.append(line.save_rep())
+        table2 = SingleTable(data_r, title_all_p_rank)
+        print(table2.table)
+        print("\n")
+        

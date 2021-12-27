@@ -63,7 +63,11 @@ class Tournament:
             print('la')
             tournament_table.update(serialized_tournament, tournament_query.name == self.name)
 
-            
+    
+    def sort_player_name(self):
+        self.players_object = sorted(self.players_object, key=lambda t: t.name)
+        return self.players_object
+
     def sort_player_rank(self):
         self.players_object = sorted(self.players_object, key=lambda t: t.rank)
         return self.players_object
