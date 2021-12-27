@@ -6,25 +6,26 @@ from models.player import Player
 from models.tournament import Tournament
 from controllers.tournament_controller import Tournament_controller
 
+
 class Controller:
 
     def __init__(self):
-        
+
         pass
 
     @staticmethod
     def start():
         choices = {
-            "1" : "manage_tournament_controller",
-            "2" : "manage_player_controller",
-            "3" : "reports_menu",
-            "0" : "quit"
+            "1": "manage_tournament_controller",
+            "2": "manage_player_controller",
+            "3": "reports_menu",
+            "0": "quit"
         }
         while True:
             choice = View.home_page()
             if choice not in ('0', '1', '2', '3'):
                 print("Not an appropriate choice.")
-            else:                         
+            else:
                 func = getattr(Controller, choices[choice])
                 func()
                 break
@@ -32,9 +33,9 @@ class Controller:
     @staticmethod
     def manage_player_controller():
         choices = {
-            "1" : "create_player",
-            "2" : "change_ranking_player",
-            "0" : "start"
+            "1": "create_player",
+            "2": "change_ranking_player",
+            "0": "start"
         }
         while True:
             try:
@@ -44,15 +45,15 @@ class Controller:
             except KeyError:
                 print("Not an appropriate choice.")
                 continue
-            else:    
+            else:
                 break
 
     @staticmethod
     def manage_tournament_controller():
         choices = {
-            "1" : "create_tournament",
-            "2" : "play_tournament_controller",
-            "0" : "start"
+            "1": "create_tournament",
+            "2": "play_tournament_controller",
+            "0": "start"
         }
         choice = View.tournament_menu_view()
         func = getattr(Controller, choices[choice])
@@ -69,15 +70,13 @@ class Controller:
     #         choice = View.tournament_menu_view()
     #     func = getattr(Controller, choices[choice], next)
     #     func()
-
-    
     @staticmethod
     def reports_menu():
         choices = {
-            "1" : "all_players",
-            "2" : "all_players_in_tournament",
-            "3" : "all_tournaments",
-            "0" : "start"
+            "1": "all_players",
+            "2": "all_players_in_tournament",
+            "3": "all_tournaments",
+            "0": "start"
         }
         choice = View.reports_menu()
         func = getattr(Controller, choices[choice])
@@ -105,7 +104,13 @@ class Controller:
     @staticmethod  
     def create_tournament():
         infos_tounament_tab = View.create_tournament_view()
-        tournament1 = Tournament(name=infos_tounament_tab[0], place=infos_tounament_tab[1], end_date=infos_tounament_tab[2], time_control=infos_tounament_tab[3], description=infos_tounament_tab[4])
+        tournament1 = Tournament(
+            name=infos_tounament_tab[0],
+            place=infos_tounament_tab[1],
+            end_date=infos_tounament_tab[2],
+            time_control=infos_tounament_tab[3],
+            description=infos_tounament_tab[4]
+        )
         tournament1.save_tournament()
         Controller.start()
 
@@ -113,7 +118,7 @@ class Controller:
     def play_tournament_controller():
         choice = View.choose_tournament_view()
         play_tournament = Tournament_controller(choice)
-        if play_tournament.check_players() == False:
+        if play_tournament.check_players() is False:
             list_player = View.choice_player_tournament_view()
             players8 = Player.get_8_players(list_player)
             play_tournament.tournament.add_players(players8)
@@ -130,8 +135,7 @@ class Controller:
 
         else:
             Controller.manage_tournament_controller()
-            
-                
+                   
     @staticmethod
     def play_round(choice):
         play_tournament = Tournament_controller(choice)
@@ -148,7 +152,13 @@ class Controller:
         all_players = Player.all_players_database()
         list_players = []
         for line in all_players:
-            player = Player(line['name'], line['first_name'], line['birth_date'], line['sex'], line['rank'])
+            player = Player(
+                line['name'],
+                line['first_name'],
+                line['birth_date'],
+                line['sex'],
+                line['rank']
+            )
             list_players.append(player)
 
         sort_players_name = sorted(list_players, key=lambda t: t.name)
@@ -170,14 +180,21 @@ class Controller:
         all_tournaments = Tournament.all_tournaments_database()
         list_tournaments = []
         for line in all_tournaments:
-            tournament = Tournament(line['name'], line['place'], line['start_date'], line['end_date'], line['nb_of_rounds'], line['rounds'], line['players'], line['time_control'], line['description'])
+            tournament = Tournament(
+                line['name'],
+                line['place'],
+                line['start_date'],
+                line['end_date'],
+                line['nb_of_rounds'],
+                line['rounds'],
+                line['players'],
+                line['time_control'],
+                line['description'])
             list_tournaments.append(tournament)
             print(tournament.name)
         View.all_tournaments(list_tournaments)
         Controller.choose("choose an action : ", [0])
         Controller.reports_menu()
-
-
 
     @staticmethod
     def choose(message, menu):
@@ -186,24 +203,5 @@ class Controller:
             if choice not in menu:
                 print("Not an appropriate choice.")
                 continue
-            else :
+            else:
                 break
-                
-
-
-
-
-
-
-            
-
-
-
-
-
-
-
-
-
-
-
