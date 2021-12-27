@@ -35,7 +35,8 @@ REPORTS_MENU = [
     "2 : All players in Tournament",
     "3 : All Tournaments",
     "4 : Rounds in Tournament",
-    "5 : Matchs in Tournament"
+    "5 : Matchs in Tournament",
+    "0 : Return"
 ]
 
 class View:
@@ -78,7 +79,7 @@ class View:
         Player.load_players_rank()
         choice = int(input('choose player : '))
         choice_rank = int(input('choose new rank : '))
-        return choice, choice_rank
+        return [choice, choice_rank]
 
     @staticmethod    
     def tournament_menu_view():
@@ -184,6 +185,8 @@ class View:
         table1 = SingleTable(data_t, title_tournament)
         table1.justify_columns[4] = 'right'
         print(table1.table)
+        print("\n")
+        print("Enter 0 to return")
 
 
     @staticmethod

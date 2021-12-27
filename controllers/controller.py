@@ -98,8 +98,8 @@ class Controller:
     @staticmethod
     def change_ranking_player():
         choice_player = View.change_ranking_view()
-        player = Player.get_players_by_id(choice_player(0))
-        
+        player = Player.get_players_by_id(choice_player[0])
+        player.change_rank(choice_player[1])
         Controller.manage_player_controller()
 
     @staticmethod  
@@ -173,7 +173,9 @@ class Controller:
             tournament = Tournament(line['name'], line['place'], line['start_date'], line['end_date'], line['nb_of_rounds'], line['rounds'], line['players'], line['time_control'], line['description'])
             list_tournaments.append(tournament)
             print(tournament.name)
-            View.all_tournaments(list_tournaments)
+        View.all_tournaments(list_tournaments)
+        Controller.choose("choose an action : ", [0])
+        Controller.reports_menu()
 
 
 
