@@ -37,12 +37,14 @@ class Controller:
             "0" : "start"
         }
         while True:
-            choice = View.manage_player_view()
-            if choice not in ('0', '1', '2'):
-                print("Not an appropriate choice.")
-            else:    
+            try:
+                choice = View.manage_player_view()
                 func = getattr(Controller, choices[choice])
                 func()
+            except KeyError:
+                print("Not an appropriate choice.")
+                continue
+            else:    
                 break
 
     @staticmethod
@@ -74,6 +76,7 @@ class Controller:
         choices = {
             "1" : "all_players",
             "2" : "all_players_in_tournament",
+            "3" : "all_tournaments",
             "0" : "start"
         }
         choice = View.reports_menu()
@@ -150,15 +153,43 @@ class Controller:
 
         sort_players_name = sorted(list_players, key=lambda t: t.name)
         sort_players_rank = sorted(list_players, key=lambda t: t.rank)
-
-        choice = View.all_players(sort_players_name, sort_players_rank)
-
+        View.all_players(sort_players_name, sort_players_rank)
+        Controller.choose("choose an action : ", [0])
+        Controller.reports_menu()
 
     @staticmethod
     def all_players_in_tournament():
-        choice = View.choose_tournament_view()
-        tr = Tournament.get_tournament(choice)
+        choice_tr = View.choose_tournament_view()
+        tr = Tournament.get_tournament(choice_tr)
         View.all_players_in_tournament(tr)
+        Controller.choose("choose an action : ", [0])
+        Controller.reports_menu()
+
+    @staticmethod
+    def all_tournaments():
+        all_tournaments = Tournament.all_tournaments_database()
+        list_tournaments = []
+        for line in all_tournaments:
+            tournament = Tournament(line['name'], line['place'], line['start_date'], line['end_date'], line['nb_of_rounds'], line['rounds'], line['players'], line['time_control'], line['description'])
+            list_tournaments.append(tournament)
+            print(tournament.name)
+            View.all_tournaments(list_tournaments)
+
+
+
+    @staticmethod
+    def choose(message, menu):
+        while True:
+            choice = View.choose(message)
+            if choice not in menu:
+                print("Not an appropriate choice.")
+                continue
+            else :
+                break
+                
+
+
+
 
 
 

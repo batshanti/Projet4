@@ -91,8 +91,13 @@ class Tournament:
         self.players_object = Tournament.make_players(self.players)
         self.save_tournament(1)
 
-
-
+    def save_rep(self):
+        list_players_name = ''
+        for line in self.players_object:
+            identity = line.identity
+            list_players_name = list_players_name + identity+'\n'
+        return [self.name, self.place, self.start_date, self.end_date, list_players_name, self.time_control, self.description]
+        
     @staticmethod
     def load_tournament_list():
         for line in tournament_table:
@@ -136,4 +141,8 @@ class Tournament:
         return liste_p
 
 
+    @staticmethod
+    def all_tournaments_database():
+        tournaments = tournament_table.all()
+        return tournaments
 

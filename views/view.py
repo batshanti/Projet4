@@ -149,10 +149,8 @@ class View:
             data_r.append(line.save_rep())
         table2 = SingleTable(data_r, title_all_p_rank)
         print(table2.table)
-        print("\n")    
+        print("\n")
         print("Enter 0 to return")
-        choice = input("choose an action : ")
-        return choice
 
     @staticmethod
     def all_players_in_tournament(tournament):
@@ -174,4 +172,23 @@ class View:
         table2 = SingleTable(data_r, title_all_p_rank)
         print(table2.table)
         print("\n")
+        print("Enter 0 to return")
+
+    @staticmethod
+    def all_tournaments(tournaments):
+        title_tournament = "ALL TOURNAMENTS"
+        data_t = [['Name', 'Place', 'Start', 'End', 'Players', 'Time control', 'Description'  ],]
+        for line in tournaments:
+            data_t.append(line.save_rep())
         
+        table1 = SingleTable(data_t, title_tournament)
+        table1.justify_columns[4] = 'right'
+        print(table1.table)
+
+
+    @staticmethod
+    def choose(message):
+        choice  = int(input(message))
+        return choice
+
+
