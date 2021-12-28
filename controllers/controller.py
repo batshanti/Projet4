@@ -5,7 +5,7 @@ from views.view import View
 from models.player import Player
 from models.tournament import Tournament
 from controllers.tournament_controller import Tournament_controller
-
+from models.round import Round
 
 class Controller:
 
@@ -76,6 +76,7 @@ class Controller:
             "1": "all_players",
             "2": "all_players_in_tournament",
             "3": "all_tournaments",
+            "4": "rounds_in_tournament",
             "0": "start"
         }
         choice = View.reports_menu()
@@ -156,7 +157,7 @@ class Controller:
                 line['name'],
                 line['first_name'],
                 line['birth_date'],
-                line['sex'],
+                line['gender'],
                 line['rank']
             )
             list_players.append(player)
@@ -196,6 +197,19 @@ class Controller:
         Controller.choose("choose an action : ", [0])
         Controller.reports_menu()
 
+    
+    @staticmethod
+    def rounds_in_tournament():
+        choice_tr = View.choose_tournament_view()
+        tr = Tournament.get_tournament(choice_tr)
+        list_rounds = []
+        for line in tr.rounds:
+            round = Round(line[0], line[1], line[2], line[3])
+            list_rounds.append(round)
+        View.all_rounds(list_rounds, tr)
+        Controller.choose("choose an action : ", [0])
+        Controller.reports_menu()
+            
     @staticmethod
     def choose(message, menu):
         while True:

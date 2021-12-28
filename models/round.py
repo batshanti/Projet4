@@ -24,6 +24,13 @@ class Round:
         self.matchs = [match_1.match(), match_2.match(), match_3.match(), match_4.match()]
         return [self.round_name, self.start_time, self.end_time, self.matchs]
 
+    def save_rep(self):
+        matchs = ''
+        for line in self.matchs:
+            matchs = matchs + line[0][0]+' VS '+line[1][0]+'\n'
+        return [self.round_name, self.start_time, self.end_time, matchs]
+
+        
 
         # end_time = time.strftime("%d/%m/%Y")+" "+time.strftime("%Hh%Mm%Ss")
         # serialized_round = {

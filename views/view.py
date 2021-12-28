@@ -188,7 +188,20 @@ class View:
         print("\n")
         print("Enter 0 to return")
 
+    @staticmethod
+    def all_rounds(rounds, tournament):
+        title_rounds = "ALL ROUNDS IN TOURNAMENT: ",tournament.name
+        data_r = [['Round Name', 'Start date round', 'End date round', 'matchs'],]
+        for line in rounds:
+            data_r.append(line.save_rep())
+        table1 = SingleTable(data_r, title_rounds)
+        table1.justify_columns[3] = 'right'
+        print(table1.table)
+        print("\n")
+        print("Enter 0 to return")
 
+
+        
     @staticmethod
     def choose(message):
         choice  = int(input(message))
