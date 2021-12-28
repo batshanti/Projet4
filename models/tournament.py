@@ -36,7 +36,7 @@ class Tournament:
                 'name': line.name,
                 'first_name': line.first_name,
                 'birth_date': line.birth_date,
-                'sex': line.sex,
+                'gender': line.gender,
                 'rank': line.rank,
                 'score': line.score
             }
@@ -56,11 +56,9 @@ class Tournament:
         }
 
         if choice == 0:
-            print('ici')
             self.tournament_table.insert(serialized_tournament)
 
         else:
-            print('la')
             tournament_table.update(serialized_tournament, tournament_query.name == self.name)
 
     
@@ -136,7 +134,14 @@ class Tournament:
     def make_players(players):
         liste_p = []
         for line in players:
-            player = Player(line['name'], line['first_name'], line['birth_date'], line['sex'], line['rank'], line['score'])
+            player = Player(
+                line['name'],
+                line['first_name'],
+                line['birth_date'],
+                line['gender'],
+                line['rank'],
+                line['score']
+            )
             liste_p.append(player)
         return liste_p
 

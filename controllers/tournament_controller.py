@@ -19,7 +19,13 @@ class Tournament_controller:
     def make_players(self):
         liste_p = []
         for line in self.tournament.players:
-            player = Player(line['name'], line['first_name'], line['birth_date'], line['sex'], line['rank'], line['score'])
+            player = Player(
+                line['name'],
+                line['first_name'],
+                line['birth_date'],
+                line['gender'],
+                line['rank'],
+                line['score'])
             liste_p.append(player)
         return liste_p
 

@@ -58,9 +58,9 @@ class View:
         name = input("Enter name :")
         first_name = input("Enter First Name :")
         birth_date = input("Enter birth date :")
-        sex = input("Enter Sex :")
+        gender = input("Enter Gender :")
         rank = input("Enter Rank :")
-        infos_player_tab = [name, first_name, birth_date, sex, rank]
+        infos_player_tab = [name, first_name, birth_date, gender, rank]
         return infos_player_tab
 
     @staticmethod
@@ -137,8 +137,8 @@ class View:
     def all_players(players_name, players_rank):
         title_all_p = 'ALL PLAYERS BY NAME'    
         title_all_p_rank = 'ALL PLAYERS BY RANK'
-        data_p = [['Name', 'Fist Name', 'Birth date', 'Sex', 'Rank'],]
-        data_r = [['Name', 'Fist Name', 'Birth date', 'Sex', 'Rank'],]
+        data_p = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'],]
+        data_r = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'],]
         for line in players_name:
             data_p.append(line.save_rep())   
         table1 = SingleTable(data_p, title_all_p)
@@ -157,8 +157,8 @@ class View:
     def all_players_in_tournament(tournament):
         title_all_p = "ALL PLAYERS IN TOURNAMENT BY NAME"
         title_all_p_rank = "ALL PLAYERS IN TOURNAMENT BY RANK"
-        data_p = [['Name', 'Fist Name', 'Birth date', 'Sex', 'Rank'],]
-        data_r = [['Name', 'Fist Name', 'Birth date', 'Sex', 'Rank'],]
+        data_p = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'],]
+        data_r = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'],]
         for line in tournament.sort_player_name():
             data_p.append(line.save_rep())
         table1 = SingleTable(data_p, title_all_p)

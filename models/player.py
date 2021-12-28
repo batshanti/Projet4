@@ -7,11 +7,11 @@ player_query = Query()
 
 class Player:
 
-    def __init__(self, name="", first_name="", birth_date="", sex="", rank=None, score=None):
+    def __init__(self, name="", first_name="", birth_date="", gender="", rank=None, score=None):
         self.name = name
         self.first_name = first_name
         self.birth_date = birth_date
-        self.sex = sex
+        self.gender = gender
         self.rank = rank
         self.score = score
         self.db = TinyDB("db.json")
@@ -24,7 +24,7 @@ class Player:
             'name': self.name,
             'first_name': self.first_name,
             'birth_date': self.birth_date,
-            'sex': self.sex,
+            'gender': self.gender,
             'rank': self.rank,
         }
 
@@ -36,7 +36,7 @@ class Player:
             'name': self.name,
             'first_name': self.first_name,
             'birth_date': self.birth_date,
-            'sex': self.sex,
+            'gender': self.gender,
             'rank': self.rank,
         }
 
@@ -44,7 +44,7 @@ class Player:
 
     
     def save_rep(self):
-        return [self.name, self.first_name, self.birth_date, self.sex, self.rank]
+        return [self.name, self.first_name, self.birth_date, self.gender, self.rank]
         
 
     def change_rank(self, rank):
@@ -62,12 +62,12 @@ class Player:
     @staticmethod
     def load_players_register():
         for line in player_table:
-            print(line.doc_id,' - ',line['first_name'],line['name'],line['birth_date'], line['sex'])
+            print(line.doc_id,' - ',line['first_name'],line['name'],line['birth_date'], line['gender'])
 
     @staticmethod
     def get_players_by_id(id):
         p_info = player_table.get(doc_id=id)
-        return Player(p_info['name'], p_info['first_name'], p_info['birth_date'], p_info['sex'], p_info['rank'])
+        return Player(p_info['name'], p_info['first_name'], p_info['birth_date'], p_info['gender'], p_info['rank'])
 
     @staticmethod
     def get_8_players(liste_id):
