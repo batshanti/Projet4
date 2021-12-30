@@ -8,8 +8,8 @@ from terminaltables import SingleTable
 HOME_PIC =  "\n   |\\_\n  /  .\\_\n |   ___)     CHESS TOURNAMENT\n |    \\\n |  =  |\n /_____\\\n[_______]\n"
 
 HOMEPAGE_MENU = [
-    
-   "1 : Tournament", 
+
+   "1 : Tournament",
    "2 : Manage player",
    "3 : Reports",
    "0 : Quit"
@@ -38,6 +38,7 @@ REPORTS_MENU = [
     "5 : Matchs in Tournament",
     "0 : Return"
 ]
+
 
 class View:
 
@@ -81,14 +82,14 @@ class View:
         choice_rank = int(input('choose new rank : '))
         return [choice, choice_rank]
 
-    @staticmethod    
+    @staticmethod
     def tournament_menu_view():
         for line in TOURNAMENT_MENU:
             print(line)
         choice = input("choose an action : ")
         return choice
 
-    @staticmethod     
+    @staticmethod
     def create_tournament_view():
         name = input("Enter name tournament: ")
         place = input("Enter place tournament: ")
@@ -101,15 +102,15 @@ class View:
     def choose_tournament_view():
         Tournament.load_tournament_list()
         choice = int(input('choose tounament :'))
-        return choice    
+        return choice
 
     @staticmethod
     def next_round():
         print("Play next round ?")
         next = input("1 > yes\n0 > return\n")
-        return next   
-            
-    @staticmethod 
+        return next
+
+    @staticmethod
     def choice_player_tournament_view():
         Player.load_players_register()
         list_player = []
@@ -121,7 +122,7 @@ class View:
             else:
                 list_player.append(choice)
                 infos_player = Player.get_players_by_id(int(choice))
-                print("player "+str(i)+" is "+infos_player['first_name'],infos_player['name'])
+                print("player "+str(i)+" is "+infos_player['first_name'], infos_player['name'])
                 i = i + 1
         return list_player
 
@@ -133,14 +134,14 @@ class View:
         choice = input("choose an action : ")
         return choice
 
-    @staticmethod    
+    @staticmethod
     def all_players(players_name, players_rank):
-        title_all_p = 'ALL PLAYERS BY NAME'    
+        title_all_p = 'ALL PLAYERS BY NAME'
         title_all_p_rank = 'ALL PLAYERS BY RANK'
-        data_p = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'],]
-        data_r = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'],]
+        data_p = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'], ]
+        data_r = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'], ]
         for line in players_name:
-            data_p.append(line.save_rep())   
+            data_p.append(line.save_rep())
         table1 = SingleTable(data_p, title_all_p)
         print("\n")
         print(table1.table)
@@ -157,15 +158,15 @@ class View:
     def all_players_in_tournament(tournament):
         title_all_p = "ALL PLAYERS IN TOURNAMENT BY NAME"
         title_all_p_rank = "ALL PLAYERS IN TOURNAMENT BY RANK"
-        data_p = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'],]
-        data_r = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'],]
+        data_p = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'], ]
+        data_r = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'], ]
         for line in tournament.sort_player_name():
             data_p.append(line.save_rep())
         table1 = SingleTable(data_p, title_all_p)
         print("\n")
         print('Tournament: '+tournament.name)
         print("\n")
-        print(table1.table) 
+        print(table1.table)
         print("\n")
 
         for line in tournament.sort_player_rank():
@@ -178,10 +179,10 @@ class View:
     @staticmethod
     def all_tournaments(tournaments):
         title_tournament = "ALL TOURNAMENTS"
-        data_t = [['Name', 'Place', 'Start', 'End', 'Players', 'Time control', 'Description'  ],]
+        data_t = [['Name', 'Place', 'Start', 'End', 'Players', 'Time control', 'Description'], ]
         for line in tournaments:
             data_t.append(line.save_rep())
-        
+
         table1 = SingleTable(data_t, title_tournament)
         table1.justify_columns[4] = 'right'
         print(table1.table)
@@ -190,8 +191,8 @@ class View:
 
     @staticmethod
     def all_rounds(rounds, tournament):
-        title_rounds = "ALL ROUNDS IN TOURNAMENT: ",tournament.name
-        data_r = [['Round Name', 'Start date round', 'End date round', 'matchs'],]
+        title_rounds = "ALL ROUNDS IN TOURNAMENT: ", tournament.name
+        data_r = [['Round Name', 'Start date round', 'End date round', 'matchs'], ]
         for line in rounds:
             data_r.append(line.save_rep())
         table1 = SingleTable(data_r, title_rounds)
@@ -200,11 +201,9 @@ class View:
         print("\n")
         print("Enter 0 to return")
 
-
-        
     @staticmethod
     def choose(message):
-        choice  = int(input(message))
+        choice = int(input(message))
         return choice
 
 
