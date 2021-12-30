@@ -1,21 +1,30 @@
 from tinydb import TinyDB, Query
 from models.player import Player
-import time 
+import time
 
 db = TinyDB("db.json")
 tournament_table = db.table("tournaments")
 tournament_query = Query()
-# time.strftime("%d/%m/%Y")
-# time.strftime("%Hh%Mm%Ss")
 
 
 class Tournament:
 
-    def __init__(self, name="", place="", start_date="", end_date="",  nb_of_rounds=4, rounds=[], players=[], time_control="", description=""):
+    def __init__(
+        self,
+        name="",
+        place="",
+        start_date="",
+        end_date="",
+        nb_of_rounds=4,
+        rounds=[],
+        players=[],
+        time_control="",
+        description=""
+    ):
 
         self.name = name
         self.place = place
-        self.start_date = time.strftime("%d/%m/%Y") 
+        self.start_date = time.strftime("%d/%m/%Y")
         self.end_date = end_date
         self.nb_of_rounds = nb_of_rounds
         self.rounds = rounds
@@ -30,7 +39,7 @@ class Tournament:
 
     def save_tournament(self, choice=0):
 
-        serialized_players = []          
+        serialized_players = []
         for line in self.players_object:
             liste = {
                 'name': line.name,
@@ -61,7 +70,6 @@ class Tournament:
         else:
             tournament_table.update(serialized_tournament, tournament_query.name == self.name)
 
-    
     def sort_player_name(self):
         self.players_object = sorted(self.players_object, key=lambda t: t.name)
         return self.players_object
@@ -82,7 +90,7 @@ class Tournament:
             for line in self.rounds:
                 round.append(line[0])
             round_number = round[-1]
-            return int(round_number[6]) 
+            return int(round_number[6])
 
     def add_players(self, players):
         self.players = players
@@ -94,17 +102,19 @@ class Tournament:
         for line in self.players_object:
             identity = line.identity
             list_players_name = list_players_name + identity+'\n'
-        return [self.name, self.place, self.start_date, self.end_date, list_players_name, self.time_control, self.description]
-        
+        return [
+            self.name,
+            self.place,
+            self.start_date,
+            self.end_date,
+            list_players_name,
+            self.time_control,
+            self.description]
+
     @staticmethod
     def load_tournament_list():
         for line in tournament_table:
-            print(line.doc_id,' - ',line['name'])
-
-    # @staticmethod            
-    # def add_players_tournament(id_tournament, list_player):
-    #     tournament_info = tournament_table.get(doc_id=id_tournament)
-    #     tournament_table.update({'players': list_player}, tournament_query.name == tournament_info.get('name'))
+            print(line.doc_id, ' - ', line['name'])
 
     @staticmethod
     def cheak_players(choice):
@@ -113,7 +123,6 @@ class Tournament:
             return False
         else:
             return True
-            
 
     @staticmethod
     def get_tournament(choice):
@@ -128,7 +137,17 @@ class Tournament:
         time_control = tournament_info['time_control']
         description = tournament_info['description']
 
-        return Tournament(name=name, place=place, start_date=start_date, end_date=end_date, nb_of_rounds=nb_of_rounds, rounds=rounds, players=players, time_control=time_control, description=description)
+        return Tournament(
+            name=name,
+            place=place,
+            start_date=start_date,
+            end_date=end_date,
+            nb_of_rounds=nb_of_rounds,
+            rounds=rounds,
+            players=players,
+            time_control=time_control,
+            description=description
+            )
 
     @staticmethod
     def make_players(players):
@@ -144,7 +163,6 @@ class Tournament:
             )
             liste_p.append(player)
         return liste_p
-
 
     @staticmethod
     def all_tournaments_database():
