@@ -59,17 +59,6 @@ class Controller:
         func = getattr(Controller, choices[choice])
         func()
 
-    # @staticmethod
-    # def next_round_menu(next):
-    #     choices = {
-    #         "1" : "play_round",
-    #         "0" : "manage_tournament_controller"
-    #     }
-    #     choice = 2
-    #     while choice != 0 or choice != 1:
-    #         choice = View.tournament_menu_view()
-    #     func = getattr(Controller, choices[choice], next)
-    #     func()
     @staticmethod
     def reports_menu():
         choices = {
@@ -90,10 +79,15 @@ class Controller:
 
     @staticmethod
     def create_player():
-        infos_player_tab = View.create_player_view()
-        player1 = Player(*infos_player_tab)
-        player1.save()
-        Controller.manage_player_controller()
+        infos_player = View.create_player_view()
+        if Controller.valid_player(infos_player) == False:
+            View.mess(str(1))
+            Controller.manage_player_controller()
+        else:
+            player1 = Player(*infos_player)
+            player1.save()
+            View.mess(str(2))
+            Controller.manage_player_controller()
 
     @staticmethod
     def change_ranking_player():
@@ -209,6 +203,17 @@ class Controller:
         View.all_rounds(list_rounds, tr)
         Controller.choose("choose an action : ", [0])
         Controller.reports_menu()
+
+    @staticmethod
+    def valid_player(player):
+        for line in player:
+            if line:
+                valid = True
+            else:
+                valid = False
+                return valid
+                
+        return valid      
             
     @staticmethod
     def choose(message, menu):

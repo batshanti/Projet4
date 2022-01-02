@@ -39,6 +39,12 @@ REPORTS_MENU = [
     "0 : Return"
 ]
 
+MESSAGES = {
+    
+    "1": "\nBad informations player, please retry\n",
+    "2": "\nthe player is created\n"
+}
+
 
 class View:
 
@@ -55,14 +61,18 @@ class View:
         return choice
 
     @staticmethod
+    def mess(number):
+        print(MESSAGES[number])
+
+    @staticmethod
     def create_player_view():
         name = input("Enter name :")
         first_name = input("Enter First Name :")
-        birth_date = input("Enter birth date :")
-        gender = input("Enter Gender :")
-        rank = input("Enter Rank :")
-        infos_player_tab = [name, first_name, birth_date, gender, rank]
-        return infos_player_tab
+        birth_date = input("Enter birth date (Format : dd/mm/yy) :")
+        gender = input("Enter Gender (F or H) :")
+        rank = int(input("Enter Rank (positive number) :"))
+        infos_player = [name.upper(), first_name.capitalize(), birth_date, gender.upper(), rank]
+        return infos_player
 
     @staticmethod
     def manage_player_view():

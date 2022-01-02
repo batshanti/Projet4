@@ -1,3 +1,4 @@
+from views.view import View
 from models.player import Player
 from models.tournament import Tournament
 from controllers.tournament_controller import Tournament_controller
@@ -27,5 +28,6 @@ player_table = db.table("players")
 # a = tr.tournament.check_round()
 # print(a)
 
-player = Player.get_players_by_id(2)
-print(player.identity)
+
+
+View.mess(str(1))
