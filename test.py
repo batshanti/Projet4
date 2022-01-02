@@ -29,5 +29,3 @@ player_table = db.table("players")
 # print(a)
 
 
-
-View.mess(str(1))

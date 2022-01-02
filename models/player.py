@@ -51,19 +51,11 @@ class Player:
         self.rank = rank
         self.save_p() 
 
-
     @staticmethod 
     def load_players_rank():
         for line in player_table:
             print(line.doc_id, ' - ', line['first_name'], line['name'], line['rank'])
-
-    
-
-    @staticmethod
-    def load_players_register():
-        for line in player_table:
-            print(line.doc_id,' - ',line['first_name'],line['name'],line['birth_date'], line['gender'])
-
+           
     @staticmethod
     def get_players_by_id(id):
         p_info = player_table.get(doc_id=id)

@@ -82,12 +82,14 @@ class View:
         return choice
 
     @staticmethod
-    def change_ranking_view():
-        print("\n"*20)
-        print("--------------------------------------------------------")
-        print(".                     PLAYERS RANK                     .")
-        print("--------------------------------------------------------")
-        Player.load_players_rank()
+    def change_ranking_view(players):
+        title_all_p_rank = 'ALL PLAYERS BY RANK'
+        data_r = [['ID', 'Name', 'Fist Name', 'Birth date', 'gender', 'Rank'], ]
+        for line in players:
+            pl = [line.doc_id, line['name'], line['first_name'], line['birth_date'], line['gender'], line['rank']]
+            data_r.append(pl)
+        table1 = SingleTable(data_r, title_all_p_rank)
+        print(table1.table)   
         choice = int(input('choose player : '))
         choice_rank = int(input('choose new rank : '))
         return [choice, choice_rank]
@@ -121,9 +123,11 @@ class View:
         return next
 
     @staticmethod
-    def choice_player_tournament_view():
-        Player.load_players_register()
+    def choice_player_tournament_view(all_players):
         list_player = []
+        for line in all_players:
+            print(line.doc_id, ' - ', line['name'], line['first_name'], line['birth_date'], line['rank'])
+
         i = 1
         while len(list_player) < 8:
             choice = input('choose player '+str(i)+': ')
@@ -131,8 +135,8 @@ class View:
                 print("player already registered")
             else:
                 list_player.append(choice)
-                infos_player = Player.get_players_by_id(int(choice))
-                print("player "+str(i)+" is "+infos_player['first_name'], infos_player['name'])
+                player = Player.get_players_by_id(int(choice))
+                print("player "+str(i)+" is "+player.identity)
                 i = i + 1
         return list_player
 

@@ -91,7 +91,8 @@ class Controller:
 
     @staticmethod
     def change_ranking_player():
-        choice_player = View.change_ranking_view()
+        all_players = Player.all_players_database()
+        choice_player = View.change_ranking_view(all_players)
         player = Player.get_players_by_id(choice_player[0])
         player.change_rank(choice_player[1])
         Controller.manage_player_controller()
@@ -114,7 +115,7 @@ class Controller:
         choice = View.choose_tournament_view()
         play_tournament = Tournament_controller(choice)
         if play_tournament.check_players() is False:
-            list_player = View.choice_player_tournament_view()
+            list_player = View.choice_player_tournament_view(Player.all_players_database())
             players8 = Player.get_8_players(list_player)
             play_tournament.tournament.add_players(players8)
 
