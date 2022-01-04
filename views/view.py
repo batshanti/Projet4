@@ -5,7 +5,7 @@ from models.player import Player
 from models.tournament import Tournament
 from terminaltables import SingleTable
 
-HOME_PIC =  "\n   |\\_\n  /  .\\_\n |   ___)     CHESS TOURNAMENT\n |    \\\n |  =  |\n /_____\\\n[_______]\n"
+HOME_PIC =  "\n   |\\_\n  /  .\\_\n |   ___)     CHESS TOURNAMENT\n |    \\\n |    |\n /_____\\\n[_______]\n"
 
 HOMEPAGE_MENU = [
 
@@ -40,7 +40,7 @@ REPORTS_MENU = [
 ]
 
 MESSAGES = {
-    
+
     "1": "\nBad informations player, please retry\n",
     "2": "\nthe player is created\n"
 }
@@ -89,7 +89,7 @@ class View:
             pl = [line.doc_id, line['name'], line['first_name'], line['birth_date'], line['gender'], line['rank']]
             data_r.append(pl)
         table1 = SingleTable(data_r, title_all_p_rank)
-        print(table1.table)   
+        print(table1.table)
         choice = int(input('choose player : '))
         choice_rank = int(input('choose new rank : '))
         return [choice, choice_rank]
@@ -219,5 +219,3 @@ class View:
     def choose(message):
         choice = int(input(message))
         return choice
-
-

@@ -1,7 +1,6 @@
 import time
 from models.player import Player
 from models.tournament import Tournament
-from models.match import Match
 from models.round import Round
 from views.view_tournament import View_tournament
 
@@ -14,7 +13,6 @@ class Tournament_controller:
         self.tournament = Tournament.get_tournament(choice)
         self.play_tournament_view = View_tournament(self.tournament.players_object)
         self.tournament.choice = choice
-        # self.cheak_round = vérif round
 
     def make_players(self):
         liste_p = []
@@ -96,4 +94,3 @@ class Tournament_controller:
                     player.score = (float(player.score) + float(line[1]))
 
         return players
-
