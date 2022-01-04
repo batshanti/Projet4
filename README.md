@@ -1,6 +1,3 @@
-# Projet 4 - Développez un programme logiciel en Python
-
-# Chess Tournament Manager
 This Python 3 program allows chess tournament management
 
 ## Installation
@@ -19,3 +16,8 @@ This Python 3 program allows chess tournament management
 ```
  py -m venv venv
  env/bin/activate.bat
+```
+#### Install packages :
+```
+pip install -r requirements.txt
+```
