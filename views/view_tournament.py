@@ -64,3 +64,5 @@ class View_tournament:
         return [player_1.identity, player_1_score, player_2.identity, player_2_score]
 
 
+
+

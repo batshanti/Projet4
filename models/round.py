@@ -34,3 +34,12 @@ class Round:
     def load_round(choice):
         round = tournament_table.get(doc_id=int(choice))
         return round.get('rounds')
+
+
+    def reports_match(self):
+        list_match = []
+        for line in self.matchs:
+            match = Match(line[0][0], line[0][1], line[1][0], line[1][1])
+            liste_match.append(match)
+        return list_match  
+        

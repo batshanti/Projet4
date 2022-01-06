@@ -205,8 +205,8 @@ class View:
 
     @staticmethod
     def all_rounds(rounds, tournament):
-        title_rounds = "ALL ROUNDS IN TOURNAMENT: ", tournament.name
-        data_r = [['Round Name', 'Start date round', 'End date round', 'matchs'], ]
+        title_rounds = "ALL ROUNDS IN TOURNAMENT: "+ tournament.name
+        data_r = [['Round Name', 'Start date round', 'End date round', 'matches'], ]
         for line in rounds:
             data_r.append(line.save_rep())
         table1 = SingleTable(data_r, title_rounds)
@@ -214,6 +214,22 @@ class View:
         print(table1.table)
         print("\n")
         print("Enter 0 to return")
+
+    @staticmethod
+    def all_matches(rounds, tournament):
+        for round in rounds:
+            data_r = [['Match Number', 'Player_1', 'Player_1 Score','Player_2', 'Player_2 Score'], ]
+            title = round.name
+            matches = round.reports_match()
+            m = 0
+            l = []
+            for match in matches:
+                l.append(m+1)
+                l.append(match.rep())
+        data_r        
+
+
+
 
     @staticmethod
     def choose(message):

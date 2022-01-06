@@ -11,3 +11,7 @@ class Match:
 
     def match(self):
         return ([self.player1, self.score_p1], [self.player2, self.score_p2])
+
+    def rep(self):
+        return [self.player1, self.score_p1, self.player2, self.score_p2]
+

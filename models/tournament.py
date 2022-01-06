@@ -147,7 +147,7 @@ class Tournament:
             players=players,
             time_control=time_control,
             description=description
-            )
+        )
 
     @staticmethod
     def make_players(players):

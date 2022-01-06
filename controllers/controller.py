@@ -206,6 +206,15 @@ class Controller:
         Controller.reports_menu()
 
     @staticmethod
+    def matches_in_tounament():
+        choice_tr = View.choose_tournament_view()
+        tr = Tournament.get_tournament(choice_tr)
+        list_rounds = []
+        for line in tr.rounds:
+            round = Round(line[0], line[1], line[2], line[3])
+            list_rounds.append(round)
+
+    @staticmethod
     def valid_player(player):
         for line in player:
             if line:

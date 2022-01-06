@@ -14,18 +14,18 @@ class Tournament_controller:
         self.play_tournament_view = View_tournament(self.tournament.players_object)
         self.tournament.choice = choice
 
-    def make_players(self):
-        liste_p = []
-        for line in self.tournament.players:
-            player = Player(
-                line['name'],
-                line['first_name'],
-                line['birth_date'],
-                line['gender'],
-                line['rank'],
-                line['score'])
-            liste_p.append(player)
-        return liste_p
+    # def make_players(self):
+    #     liste_p = []
+    #     for line in self.tournament.players:
+    #         player = Player(
+    #             line['name'],
+    #             line['first_name'],
+    #             line['birth_date'],
+    #             line['gender'],
+    #             line['rank'],
+    #             line['score'])
+    #         liste_p.append(player)
+    #     return liste_p
 
     def first(self):
 
