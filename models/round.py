@@ -40,6 +40,6 @@ class Round:
         list_match = []
         for line in self.matchs:
             match = Match(line[0][0], line[0][1], line[1][0], line[1][1])
-            liste_match.append(match)
-        return list_match  
+            list_match.append(match)
+        return list_match 
         

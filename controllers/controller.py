@@ -66,6 +66,7 @@ class Controller:
             "2": "all_players_in_tournament",
             "3": "all_tournaments",
             "4": "rounds_in_tournament",
+            "5": "matches_in_tounament",
             "0": "start"
         }
         choice = View.reports_menu()
@@ -213,6 +214,9 @@ class Controller:
         for line in tr.rounds:
             round = Round(line[0], line[1], line[2], line[3])
             list_rounds.append(round)
+        View.all_matches(list_rounds)
+        Controller.choose("choose an action : ", [0])
+        Controller.reports_menu()
 
     @staticmethod
     def valid_player(player):

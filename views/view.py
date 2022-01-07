@@ -216,20 +216,24 @@ class View:
         print("Enter 0 to return")
 
     @staticmethod
-    def all_matches(rounds, tournament):
+    def all_matches(rounds):
         for round in rounds:
-            data_r = [['Match Number', 'Player_1', 'Player_1 Score','Player_2', 'Player_2 Score'], ]
-            title = round.name
+            data_r = [['Match', 'Player_1', 'Score','Player_2', 'Score'], ]
+            title = round.round_name
             matches = round.reports_match()
-            m = 0
+            match_nb = 0
             l = []
             for match in matches:
-                l.append(m+1)
-                l.append(match.rep())
-        data_r        
+                match_nb = match_nb + 1
+                r = match.rep()
+                r.insert(0, match_nb)
+                l.append(r)
 
-
-
+            data_r.extend(l)    
+            table1 = SingleTable(data_r, title)
+            print(table1.table)
+        print("\n")
+        print("Enter 0 to return")
 
     @staticmethod
     def choose(message):
