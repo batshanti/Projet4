@@ -64,10 +64,13 @@ class Tournament_controller:
             )
 
         self.tournament.save_tournament(1)
-        next = -1
-        while next != 0 and next != 1:
-            next = self.play_tournament_view.next_round()
-        return next
+        if self.tournament.check_round() == 4:
+            return 3
+        else:
+            next = -1
+            while next != 0 and next != 1:
+                next = self.play_tournament_view.next_round()
+            return next
 
     def check_players(self):
         if len(self.tournament.players) == 0:

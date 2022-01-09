@@ -102,6 +102,22 @@ class View:
         return choice
 
     @staticmethod
+    def result(tournament):
+        players = tournament.sort_player_score()
+        title = tournament.name
+        data_result = [['#', 'Players', 'Score', 'Rank'], ]
+        for i,player in enumerate(players):
+            i = i + 1
+            r = player.result()
+            r.insert(0, i)
+            data_result.append(r)
+        table1 = SingleTable(data_result, title)
+        print(table1.table)
+        print("\n")
+        print("Enter 0 to return")
+
+
+    @staticmethod
     def create_tournament_view():
         name = input("Enter name tournament: ")
         place = input("Enter place tournament: ")

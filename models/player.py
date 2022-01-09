@@ -45,6 +45,10 @@ class Player:
     
     def save_rep(self):
         return [self.name, self.first_name, self.birth_date, self.gender, self.rank]
+
+    def result(self):
+        return [self.identity, self.score, self.rank]
+        
         
 
     def change_rank(self, rank):

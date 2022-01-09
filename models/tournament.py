@@ -69,6 +69,7 @@ class Tournament:
 
         else:
             tournament_table.update(serialized_tournament, tournament_query.name == self.name)
+            self.players_object = Tournament.make_players(self.players)
 
     def sort_player_name(self):
         self.players_object = sorted(self.players_object, key=lambda t: t.name)

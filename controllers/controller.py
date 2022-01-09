@@ -130,19 +130,28 @@ class Controller:
         if play_tournament.tournament.check_round() >= 1 and play_tournament.tournament.check_round() < 4:
             Controller.play_round(choice)
 
-        else:
-            Controller.manage_tournament_controller()
-                   
+        if play_tournament.tournament.check_round() == 4:
+            Controller.result(play_tournament.tournament)
+                               
     @staticmethod
     def play_round(choice):
         play_tournament = Tournament_controller(choice)
         next = play_tournament.round()
+        if next == 3:
+            Controller.result(play_tournament.tournament)
         if next == 0:
             Controller.manage_tournament_controller()
         if next == 1 and play_tournament.tournament.check_round() == 4:
             Controller.manage_tournament_controller()
         if next == 1:
             play_tournament.round()
+
+    @staticmethod
+    def result(tournament):
+        View.result(tournament)
+        Controller.choose("choose an action : ", [0])
+        Controller.manage_tournament_controller()
+
 
     @staticmethod
     def all_players():
