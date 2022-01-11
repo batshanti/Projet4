@@ -110,20 +110,13 @@ class Tournament:
             self.end_date,
             list_players_name,
             self.time_control,
-            self.description]
+            self.description
+        ]
 
     @staticmethod
     def load_tournament_list():
         for line in tournament_table:
             print(line.doc_id, ' - ', line['name'])
-
-    @staticmethod
-    def cheak_players(choice):
-        tournament_info = tournament_table.get(doc_id=int(choice))
-        if len(tournament_info['players']) == 0:
-            return False
-        else:
-            return True
 
     @staticmethod
     def get_tournament(choice):
