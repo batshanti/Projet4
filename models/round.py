@@ -24,7 +24,7 @@ class Round:
         self.matchs = [match_1.match(), match_2.match(), match_3.match(), match_4.match()]
         return [self.round_name, self.start_time, self.end_time, self.matchs]
 
-    def save_rep(self):
+    def info_rep(self):
         matchs = ''
         for line in self.matchs:
             matchs = matchs + line[0][0]+' VS '+line[1][0]+'\n'
@@ -35,11 +35,10 @@ class Round:
         round = tournament_table.get(doc_id=int(choice))
         return round.get('rounds')
 
-
-    def reports_match(self):
+    def get_match_reports(self):
         list_match = []
         for line in self.matchs:
             match = Match(line[0][0], line[0][1], line[1][0], line[1][1])
             list_match.append(match)
-        return list_match 
+        return list_match
         

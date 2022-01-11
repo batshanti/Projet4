@@ -211,7 +211,7 @@ class View:
         title_tournament = "ALL TOURNAMENTS"
         data_t = [['Name', 'Place', 'Start', 'End', 'Players', 'Time control', 'Description'], ]
         for line in tournaments:
-            data_t.append(line.save_rep())
+            data_t.append(line.info_rep())
 
         table1 = SingleTable(data_t, title_tournament)
         table1.justify_columns[4] = 'right'
@@ -224,7 +224,7 @@ class View:
         title_rounds = "ALL ROUNDS IN TOURNAMENT: "+ tournament.name
         data_r = [['Round Name', 'Start date round', 'End date round', 'matches'], ]
         for line in rounds:
-            data_r.append(line.save_rep())
+            data_r.append(line.info_rep())
         table1 = SingleTable(data_r, title_rounds)
         table1.justify_columns[3] = 'right'
         print(table1.table)
@@ -236,7 +236,7 @@ class View:
         for round in rounds:
             data_r = [['Match', 'Player_1', 'Score','Player_2', 'Score'], ]
             title = round.round_name
-            matches = round.reports_match()
+            matches = round.get_match_reports()
             match_nb = 0
             l = []
             for match in matches:
