@@ -30,7 +30,7 @@ class Player:
 
         self.player_table.insert(serialized_player)
 
-    def save_p(self):
+    def update(self):
         serialized_player = {
 
             'name': self.name,
@@ -43,17 +43,15 @@ class Player:
         self.player_table.update(serialized_player, player_query.name == self.name)
 
     
-    def save_rep(self):
+    def info_rep(self):
         return [self.name, self.first_name, self.birth_date, self.gender, self.rank]
 
     def result(self):
         return [self.identity, self.score, self.rank]
         
-        
-
     def change_rank(self, rank):
         self.rank = rank
-        self.save_p() 
+        self.update()
 
     @staticmethod 
     def load_players_rank():

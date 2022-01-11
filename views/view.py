@@ -171,14 +171,14 @@ class View:
         data_p = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'], ]
         data_r = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'], ]
         for line in players_name:
-            data_p.append(line.save_rep())
+            data_p.append(line.info_rep())
         table1 = SingleTable(data_p, title_all_p)
         print("\n")
         print(table1.table)
         print("\n")
 
         for line in players_rank:
-            data_r.append(line.save_rep())
+            data_r.append(line.info_rep())
         table2 = SingleTable(data_r, title_all_p_rank)
         print(table2.table)
         print("\n")
@@ -191,7 +191,7 @@ class View:
         data_p = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'], ]
         data_r = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'], ]
         for line in tournament.sort_player_name():
-            data_p.append(line.save_rep())
+            data_p.append(line.info_rep())
         table1 = SingleTable(data_p, title_all_p)
         print("\n")
         print('Tournament: '+tournament.name)
@@ -200,7 +200,7 @@ class View:
         print("\n")
 
         for line in tournament.sort_player_rank():
-            data_r.append(line.save_rep())
+            data_r.append(line.info_rep())
         table2 = SingleTable(data_r, title_all_p_rank)
         print(table2.table)
         print("\n")
