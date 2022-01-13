@@ -58,10 +58,23 @@ class View_tournament:
         print(player_1.identity," VS ",player_2.identity)
         player_1_message = player_1.identity+" -> Enter score : "
         player_2_message = player_2.identity+" -> Enter score : "
-        player_1_score = float(input(player_1_message))
-        player_2_score = float(input(player_2_message))
+        valide_score = [0, 0.5, 1]
+        while True:
+            try:
+                player_1_score = float(input(player_1_message))
+                player_2_score = float(input(player_2_message))
+                assert player_1_score in valide_score and player_2_score in valide_score
+            except AssertionError:
+                print("score must 0 or 0.5 or 1")
+            except ValueError:
+                print("score must 0 or 0.5 or 1")
+                pass
+            else:
+                return [player_1.identity, player_1_score, player_2.identity, player_2_score]
+                break
+                
 
-        return [player_1.identity, player_1_score, player_2.identity, player_2_score]
+        
 
 
 
