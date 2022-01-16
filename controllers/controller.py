@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 # coding: utf-8
 
-from views.view import View
+from views.view import View, MESSAGES
 from models.player import Player
 from models.tournament import Tournament
 from controllers.tournament_controller import Tournament_controller
@@ -43,10 +43,8 @@ class Controller:
                 func = getattr(Controller, choices[choice])
                 func()
             except KeyError:
-                print("Not an appropriate choice.")
+                View.mess("4")
                 continue
-            else:
-                break
 
     @staticmethod
     def manage_tournament_controller():
@@ -55,9 +53,14 @@ class Controller:
             "2": "play_tournament_controller",
             "0": "start"
         }
-        choice = View.tournament_menu_view()
-        func = getattr(Controller, choices[choice])
-        func()
+        while True:
+            try:
+                choice = View.tournament_menu_view()
+                func = getattr(Controller, choices[choice])
+                func()
+            except KeyError:
+                View.mess("4")
+                continue
 
     @staticmethod
     def reports_menu():
@@ -69,10 +72,14 @@ class Controller:
             "5": "matches_in_tounament",
             "0": "start"
         }
-        choice = View.reports_menu()
-        func = getattr(Controller, choices[choice])
-        func()
-        pass
+        while True:
+            try:
+                choice = View.reports_menu()
+                func = getattr(Controller, choices[choice])
+                func()
+            except KeyError:
+                View.mess("4")
+                continue
 
     @staticmethod
     def quit():
@@ -80,8 +87,8 @@ class Controller:
 
     @staticmethod
     def create_player():
-        infos_player = View.create_player_view()
-        if Controller.valid_player(infos_player) == False:
+        infos = View.create_player_view()
+        if Controller.valid_information(infos) == False:
             View.mess(str(1))
             Controller.manage_player_controller()
         else:
@@ -90,6 +97,24 @@ class Controller:
             View.mess(str(2))
             Controller.manage_player_controller()
 
+    @staticmethod  
+    def create_tournament():
+        infos = View.create_tournament_view()
+        if Controller.valid_information(infos) == False:
+            View.mess(str(1))
+            Controller.manage_tournament_controller()
+        else:           
+            tournament1 = Tournament(
+                name=infos_tounament_tab[0],
+                place=infos_tounament_tab[1],
+                end_date=infos_tounament_tab[2],
+                time_control=infos_tounament_tab[3],
+                description=infos_tounament_tab[4]
+            )
+            tournament1.save_tournament()
+            View.mess('2')
+            Controller.manage_tournament_controller()
+
     @staticmethod
     def change_ranking_player():
         all_players = Player.all_players_database()
@@ -97,19 +122,6 @@ class Controller:
         player = Player.get_players_by_id(choice_player[0])
         player.change_rank(choice_player[1])
         Controller.manage_player_controller()
-
-    @staticmethod  
-    def create_tournament():
-        infos_tounament_tab = View.create_tournament_view()
-        tournament1 = Tournament(
-            name=infos_tounament_tab[0],
-            place=infos_tounament_tab[1],
-            end_date=infos_tounament_tab[2],
-            time_control=infos_tounament_tab[3],
-            description=infos_tounament_tab[4]
-        )
-        tournament1.save_tournament()
-        Controller.start()
 
     @staticmethod
     def play_tournament_controller():
@@ -149,7 +161,7 @@ class Controller:
     @staticmethod
     def result(tournament):
         View.result(tournament)
-        Controller.choose("choose an action : ", [0])
+        Controller.choose((MESSAGES['3'], [0]))
         Controller.manage_tournament_controller()
 
 
@@ -170,7 +182,7 @@ class Controller:
         sort_players_name = sorted(list_players, key=lambda t: t.name)
         sort_players_rank = sorted(list_players, key=lambda t: t.rank)
         View.all_players(sort_players_name, sort_players_rank)
-        Controller.choose("choose an action : ", [0])
+        Controller.choose(MESSAGES['3'], [0])
         Controller.reports_menu()
 
     @staticmethod
@@ -178,7 +190,7 @@ class Controller:
         choice_tr = View.choose_tournament_view()
         tr = Tournament.get_tournament(choice_tr)
         View.all_players_in_tournament(tr)
-        Controller.choose("choose an action : ", [0])
+        Controller.choose(MESSAGES['3'], [0])
         Controller.reports_menu()
 
     @staticmethod
@@ -199,7 +211,7 @@ class Controller:
             list_tournaments.append(tournament)
             print(tournament.name)
         View.all_tournaments(list_tournaments)
-        Controller.choose("choose an action : ", [0])
+        Controller.choose(MESSAGES['3'], [0])
         Controller.reports_menu()
 
     
@@ -212,7 +224,7 @@ class Controller:
             round = Round(line[0], line[1], line[2], line[3])
             list_rounds.append(round)
         View.all_rounds(list_rounds, tr)
-        Controller.choose("choose an action : ", [0])
+        Controller.choose(MESSAGES['3'], [0])
         Controller.reports_menu()
 
     @staticmethod
@@ -224,26 +236,25 @@ class Controller:
             round = Round(line[0], line[1], line[2], line[3])
             list_rounds.append(round)
         View.all_matches(list_rounds)
-        Controller.choose("choose an action : ", [0])
+        Controller.choose(MESSAGES['3'], [0])
         Controller.reports_menu()
 
     @staticmethod
-    def valid_player(player):
+    def valid_information(player):
         for line in player:
             if line:
                 valid = True
             else:
                 valid = False
                 return valid
-                
-        return valid      
+        return valid  
             
     @staticmethod
     def choose(message, menu):
         while True:
             choice = View.choose(message)
             if choice not in menu:
-                print("Not an appropriate choice.")
+                View.mess("4")
                 continue
             else:
                 break

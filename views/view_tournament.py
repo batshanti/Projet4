@@ -6,7 +6,6 @@ class View_tournament:
         pass
 
     def players_tournament(self, players):
-
         for line in players:
             print(line.name, line.rank)
 

@@ -41,8 +41,10 @@ REPORTS_MENU = [
 
 MESSAGES = {
 
-    "1": "\nBad informations player, please retry\n",
-    "2": "\nthe player is created\n"
+    "1": "\nBad informations, please retry\n",
+    "2": "\nthe player is created\n",
+    "3": "choose an action : ",
+    "4": "Not an appropriate choice."
 }
 
 

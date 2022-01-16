@@ -32,7 +32,6 @@ class Tournament:
         self.players_object = Tournament.make_players(self.players)
         self.time_control = time_control
         self.description = description
-
         self.db = TinyDB("db.json")
         self.tournament_table = self.db.table("tournaments")
         self.tournament_query = Query()
