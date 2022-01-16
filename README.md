@@ -28,3 +28,7 @@ pip install -r requirements.txt
 ```
 python main.py
 ```
+## Generate a report : Flake8 
+```
+flake8 --max-line-length 119 --format html --htmldir flake8-report
+```

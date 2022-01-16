@@ -16,7 +16,7 @@ class Controller:
     @staticmethod
     def start():
         choices = {
-            "1": "manage_tournament_controller",
+            "1": "manage_tournament",
             "2": "manage_player",
             "3": "reports_menu",
             "0": "quit"
@@ -48,7 +48,7 @@ class Controller:
                 pass
 
     @staticmethod
-    def manage_tournament_controller():
+    def manage_tournament():
         choices = {
             "1": "create_tournament",
             "2": "play_tournament_controller",
@@ -105,7 +105,7 @@ class Controller:
         infos = View.create_tournament_view()
         if Controller.valid_information(infos) == False:
             View.mess(str(1))
-            Controller.manage_tournament_controller()
+            Controller.manage_tournament()
         else:           
             tournament1 = Tournament(
                 name=infos_tounament_tab[0],
@@ -116,7 +116,7 @@ class Controller:
             )
             tournament1.save_tournament()
             View.mess('2')
-            Controller.manage_tournament_controller()
+            Controller.manage_tournament()
 
     @staticmethod
     def change_ranking_player():
@@ -138,7 +138,7 @@ class Controller:
         if play_tournament.tournament.check_round() == 0:
             next = play_tournament.first()
             if next == 0:
-                Controller.manage_tournament_controller()
+                Controller.manage_tournament()
             else:
                 Controller.play_round(choice)
 
@@ -155,9 +155,9 @@ class Controller:
         if next == 3:
             Controller.result(play_tournament.tournament)
         if next == 0:
-            Controller.manage_tournament_controller()
+            Controller.manage_tournament()
         if next == 1 and play_tournament.tournament.check_round() == 4:
-            Controller.manage_tournament_controller()
+            Controller.manage_tournament()
         if next == 1:
             play_tournament.round()
 
@@ -165,7 +165,7 @@ class Controller:
     def result(tournament):
         View.result(tournament)
         Controller.choose((MESSAGES['3'], [0]))
-        Controller.manage_tournament_controller()
+        Controller.manage_tournament()
 
 
     @staticmethod
