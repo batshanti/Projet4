@@ -17,7 +17,7 @@ class Controller:
     def start():
         choices = {
             "1": "manage_tournament_controller",
-            "2": "manage_player_controller",
+            "2": "manage_player",
             "3": "reports_menu",
             "0": "quit"
         }
@@ -31,7 +31,7 @@ class Controller:
                 break
 
     @staticmethod
-    def manage_player_controller():
+    def manage_player():
         choices = {
             "1": "create_player",
             "2": "change_ranking_player",
@@ -42,9 +42,10 @@ class Controller:
                 choice = View.manage_player_view()
                 func = getattr(Controller, choices[choice])
                 func()
+                break
             except KeyError:
                 View.mess("4")
-                continue
+                pass
 
     @staticmethod
     def manage_tournament_controller():
@@ -58,6 +59,7 @@ class Controller:
                 choice = View.tournament_menu_view()
                 func = getattr(Controller, choices[choice])
                 func()
+                break
             except KeyError:
                 View.mess("4")
                 continue
@@ -77,6 +79,7 @@ class Controller:
                 choice = View.reports_menu()
                 func = getattr(Controller, choices[choice])
                 func()
+                break
             except KeyError:
                 View.mess("4")
                 continue
@@ -90,12 +93,12 @@ class Controller:
         infos = View.create_player_view()
         if Controller.valid_information(infos) == False:
             View.mess(str(1))
-            Controller.manage_player_controller()
+            Controller.manage_player()
         else:
             player1 = Player(*infos_player)
             player1.save()
             View.mess(str(2))
-            Controller.manage_player_controller()
+            Controller.manage_player()
 
     @staticmethod  
     def create_tournament():
@@ -121,7 +124,7 @@ class Controller:
         choice_player = View.change_ranking_view(all_players)
         player = Player.get_players_by_id(choice_player[0])
         player.change_rank(choice_player[1])
-        Controller.manage_player_controller()
+        Controller.manage_player()
 
     @staticmethod
     def play_tournament_controller():
