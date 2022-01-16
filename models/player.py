@@ -42,13 +42,12 @@ class Player:
 
         self.player_table.update(serialized_player, player_query.name == self.name)
 
-    
     def info_rep(self):
         return [self.name, self.first_name, self.birth_date, self.gender, self.rank]
 
     def result(self):
         return [self.identity, self.score, self.rank]
-        
+
     def change_rank(self, rank):
         self.rank = rank
         self.update()
@@ -63,7 +62,7 @@ class Player:
         players8 = []
         for line in liste_id:
             dict_players = dict(player_table.get(doc_id=int(line)))
-            dict_players.update({'score':0})
+            dict_players.update({'score': 0})
             players8.append(dict_players)
 
         return players8

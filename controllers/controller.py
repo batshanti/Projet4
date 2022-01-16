@@ -7,6 +7,7 @@ from models.tournament import Tournament
 from controllers.tournament_controller import Tournament_controller
 from models.round import Round
 
+
 class Controller:
 
     def __init__(self):
@@ -91,28 +92,28 @@ class Controller:
     @staticmethod
     def create_player():
         infos = View.create_player_view()
-        if Controller.valid_information(infos) == False:
+        if Controller.valid_information(infos) is False:
             View.mess(str(1))
             Controller.manage_player()
         else:
-            player1 = Player(*infos_player)
+            player1 = Player(*infos)
             player1.save()
             View.mess(str(2))
             Controller.manage_player()
 
-    @staticmethod  
+    @staticmethod
     def create_tournament():
         infos = View.create_tournament_view()
-        if Controller.valid_information(infos) == False:
+        if Controller.valid_information(infos) is False:
             View.mess(str(1))
             Controller.manage_tournament()
-        else:           
+        else:
             tournament1 = Tournament(
-                name=infos_tounament_tab[0],
-                place=infos_tounament_tab[1],
-                end_date=infos_tounament_tab[2],
-                time_control=infos_tounament_tab[3],
-                description=infos_tounament_tab[4]
+                name=infos[0],
+                place=infos[1],
+                end_date=infos[2],
+                time_control=infos[3],
+                description=infos[4]
             )
             tournament1.save_tournament()
             View.mess('2')
@@ -147,7 +148,7 @@ class Controller:
 
         if play_tournament.tournament.check_round() == 4:
             Controller.result(play_tournament.tournament)
-                               
+
     @staticmethod
     def play_round(choice):
         play_tournament = Tournament_controller(choice)
@@ -166,7 +167,6 @@ class Controller:
         View.result(tournament)
         Controller.choose((MESSAGES['3'], [0]))
         Controller.manage_tournament()
-
 
     @staticmethod
     def all_players():
@@ -217,7 +217,6 @@ class Controller:
         Controller.choose(MESSAGES['3'], [0])
         Controller.reports_menu()
 
-    
     @staticmethod
     def rounds_in_tournament():
         choice_tr = View.choose_tournament_view()
@@ -250,8 +249,8 @@ class Controller:
             else:
                 valid = False
                 return valid
-        return valid  
-            
+        return valid
+
     @staticmethod
     def choose(message, menu):
         while True:

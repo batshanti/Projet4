@@ -108,7 +108,7 @@ class View:
         players = tournament.sort_player_score()
         title = tournament.name
         data_result = [['#', 'Players', 'Score', 'Rank'], ]
-        for i,player in enumerate(players):
+        for i, player in enumerate(players):
             i = i + 1
             r = player.result()
             r.insert(0, i)
@@ -117,7 +117,6 @@ class View:
         print(table1.table)
         print("\n")
         print("Enter 0 to return")
-
 
     @staticmethod
     def create_tournament_view():
@@ -223,7 +222,7 @@ class View:
 
     @staticmethod
     def all_rounds(rounds, tournament):
-        title_rounds = "ALL ROUNDS IN TOURNAMENT: "+ tournament.name
+        title_rounds = "ALL ROUNDS IN TOURNAMENT: " + tournament.name
         data_r = [['Round Name', 'Start date round', 'End date round', 'matches'], ]
         for line in rounds:
             data_r.append(line.info_rep())
@@ -236,18 +235,18 @@ class View:
     @staticmethod
     def all_matches(rounds):
         for round in rounds:
-            data_r = [['Match', 'Player_1', 'Score','Player_2', 'Score'], ]
+            data_r = [['Match', 'Player_1', 'Score', 'Player_2', 'Score'], ]
             title = round.round_name
             matches = round.get_match_reports()
             match_nb = 0
-            l = []
+            i = []
             for match in matches:
                 match_nb = match_nb + 1
                 r = match.rep()
                 r.insert(0, match_nb)
-                l.append(r)
+                i.append(r)
 
-            data_r.extend(l)    
+            data_r.extend(i)
             table1 = SingleTable(data_r, title)
             print(table1.table)
         print("\n")
