@@ -16,6 +16,7 @@ class Controller:
 
     @staticmethod
     def start():
+        '''Display home page menu and ask the user to choose to navigate'''
         choices = {
             "1": "manage_tournament",
             "2": "manage_player",
@@ -33,6 +34,7 @@ class Controller:
 
     @staticmethod
     def manage_player():
+        '''Display manage player menu and ask the user to choose to navigate'''
         choices = {
             "1": "create_player",
             "2": "change_ranking_player",
@@ -50,6 +52,7 @@ class Controller:
 
     @staticmethod
     def manage_tournament():
+        '''Display manage tournament menu and ask the user to choose to navigate'''
         choices = {
             "1": "create_tournament",
             "2": "play_tournament_controller",
@@ -67,6 +70,7 @@ class Controller:
 
     @staticmethod
     def reports_menu():
+        '''Display reports tournament menu and ask the user to choose to navigate'''
         choices = {
             "1": "all_players",
             "2": "all_players_in_tournament",
@@ -87,10 +91,12 @@ class Controller:
 
     @staticmethod
     def quit():
+        '''End the program'''
         pass
 
     @staticmethod
     def create_player():
+        '''Request player information and save in database'''
         infos = View.create_player_view()
         if Controller.valid_information(infos) is False:
             View.mess(str(1))
@@ -103,6 +109,7 @@ class Controller:
 
     @staticmethod
     def create_tournament():
+        '''Request tournament information and save in database'''
         infos = View.create_tournament_view()
         if Controller.valid_information(infos) is False:
             View.mess(str(1))
@@ -121,6 +128,7 @@ class Controller:
 
     @staticmethod
     def change_ranking_player():
+        '''ask and save new rank player in database'''
         all_players = Player.all_players_database()
         choice_player = View.change_ranking_view(all_players)
         player = Player.get_players_by_id(choice_player[0])
@@ -164,12 +172,14 @@ class Controller:
 
     @staticmethod
     def result(tournament):
+        '''Display result at the end of the tournament'''
         View.result(tournament)
         Controller.choose((MESSAGES['3'], [0]))
         Controller.manage_tournament()
 
     @staticmethod
     def all_players():
+        '''Get all players in database and show them listed by Name and Rank'''
         all_players = Player.all_players_database()
         list_players = []
         for line in all_players:
@@ -190,6 +200,7 @@ class Controller:
 
     @staticmethod
     def all_players_in_tournament():
+        '''Get all players in database for specific tournament and display'''
         choice_tr = View.choose_tournament_view()
         tr = Tournament.get_tournament(choice_tr)
         View.all_players_in_tournament(tr)
@@ -198,6 +209,7 @@ class Controller:
 
     @staticmethod
     def all_tournaments():
+        '''Get all tournament in database and display'''
         all_tournaments = Tournament.all_tournaments_database()
         list_tournaments = []
         for line in all_tournaments:
@@ -219,6 +231,7 @@ class Controller:
 
     @staticmethod
     def rounds_in_tournament():
+        '''Get all rounds informartion for specific tournament and display'''
         choice_tr = View.choose_tournament_view()
         tr = Tournament.get_tournament(choice_tr)
         list_rounds = []
@@ -231,6 +244,7 @@ class Controller:
 
     @staticmethod
     def matches_in_tounament():
+        '''Get all matches informartion for specific tournament and display'''
         choice_tr = View.choose_tournament_view()
         tr = Tournament.get_tournament(choice_tr)
         list_rounds = []
@@ -242,8 +256,9 @@ class Controller:
         Controller.reports_menu()
 
     @staticmethod
-    def valid_information(player):
-        for line in player:
+    def valid_information(info):
+        '''Check if the input informations Player / Tournament is not empty'''
+        for line in info:
             if line:
                 valid = True
             else:
