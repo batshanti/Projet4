@@ -19,6 +19,7 @@ class Player:
         self.identity = self.name+' '+self.first_name
 
     def save(self):
+        '''Save player in database'''
         serialized_player = {
 
             'name': self.name,
@@ -31,6 +32,7 @@ class Player:
         self.player_table.insert(serialized_player)
 
     def update(self):
+        '''Update information for existing player in database'''
         serialized_player = {
 
             'name': self.name,
@@ -43,6 +45,7 @@ class Player:
         self.player_table.update(serialized_player, player_query.name == self.name)
 
     def info_rep(self):
+        '''Return list for report'''
         return [self.name, self.first_name, self.birth_date, self.gender, self.rank]
 
     def result(self):
@@ -54,11 +57,13 @@ class Player:
 
     @staticmethod
     def get_players_by_id(id):
+        '''get specific player in database and return player object'''
         p_info = player_table.get(doc_id=id)
         return Player(p_info['name'], p_info['first_name'], p_info['birth_date'], p_info['gender'], p_info['rank'])
 
     @staticmethod
     def get_8_players(liste_id):
+        '''Get players informations in database with a doc.id's'''
         players8 = []
         for line in liste_id:
             dict_players = dict(player_table.get(doc_id=int(line)))
@@ -69,5 +74,6 @@ class Player:
 
     @staticmethod
     def all_players_database():
+        '''Return all players in database'''
         players = player_table.all()
         return players
