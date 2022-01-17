@@ -13,21 +13,8 @@ class Tournament_controller:
         self.play_tournament_view = View_tournament(self.tournament.players_object)
         self.tournament.choice = choice
 
-    # def make_players(self):
-    #     liste_p = []
-    #     for line in self.tournament.players:
-    #         player = Player(
-    #             line['name'],
-    #             line['first_name'],
-    #             line['birth_date'],
-    #             line['gender'],
-    #             line['rank'],
-    #             line['score'])
-    #         liste_p.append(player)
-    #     return liste_p
-
     def first(self):
-
+        '''Play first round. '''
         self.play_tournament_view.players_tournament(self.tournament.sort_player_rank())
         start_time = time.strftime("%d/%m/%Y")+" "+time.strftime("%Hh%Mm%Ss")
         round_1_score = self.play_tournament_view.first_round(self.tournament.players_object, self.tournament.name)
@@ -88,8 +75,7 @@ class Tournament_controller:
             [score[2][2], score[2][3]],
             [score[3][0], score[3][1]],
             [score[3][2], score[3][3]]
-            ]
-
+        ]
         for player in players:
             for line in tab_score:
                 if player.identity == line[0]:

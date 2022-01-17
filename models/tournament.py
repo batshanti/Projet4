@@ -29,7 +29,7 @@ class Tournament:
         self.nb_of_rounds = nb_of_rounds
         self.rounds = rounds
         self.players = players
-        self.players_object = Tournament.make_players(self.players)
+        self.players_object = Tournament.make_players_object(self.players)
         self.time_control = time_control
         self.description = description
         self.db = TinyDB("db.json")
@@ -71,7 +71,7 @@ class Tournament:
 
         else:
             tournament_table.update(serialized_tournament, tournament_query.name == self.name)
-            self.players_object = Tournament.make_players(self.players)
+            self.players_object = Tournament.make_players_object(self.players)
 
     def sort_player_name(self):
         self.players_object = sorted(self.players_object, key=lambda t: t.name)
@@ -99,7 +99,7 @@ class Tournament:
     def add_players(self, players):
         '''Add players in tournament and save'''
         self.players = players
-        self.players_object = Tournament.make_players(self.players)
+        self.players_object = Tournament.make_players_object(self.players)
         self.save_tournament(1)
 
     def save_rep(self):
@@ -150,7 +150,8 @@ class Tournament:
         )
 
     @staticmethod
-    def make_players(players):
+    def make_players_object(players):
+        '''Return list of players object'''
         liste_p = []
         for line in players:
             player = Player(

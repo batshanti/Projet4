@@ -5,7 +5,8 @@ from models.player import Player
 from models.tournament import Tournament
 from terminaltables import SingleTable
 
-HOME_PIC =  "\n   |\\_\n  /  .\\_\n |   ___)     CHESS TOURNAMENT\n |    \\\n |    |\n /_____\\\n[_______]\n"
+HOME_PIC_1 = "\n   |\\_\n  /  .\\_\n |   ___)"
+HOME_PIC_2 = "     CHESS TOURNAMENT\n |    \\\n |    |\n /_____\\\n[_______]\n"
 
 HOMEPAGE_MENU = [
 
@@ -56,7 +57,7 @@ class View:
     @staticmethod
     def home_page():
         print("\n"*20)
-        print(HOME_PIC)
+        print(HOME_PIC_1 + HOME_PIC_2)
         for line in HOMEPAGE_MENU:
             print(line)
         choice = input("choose an action : ")
