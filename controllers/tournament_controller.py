@@ -14,7 +14,7 @@ class Tournament_controller:
         self.tournament.choice = choice
 
     def first(self):
-        '''Play first round. '''
+        """"""
         self.play_tournament_view.players_tournament(self.tournament.sort_player_rank())
         start_time = time.strftime("%d/%m/%Y")+" "+time.strftime("%Hh%Mm%Ss")
         round_1_score = self.play_tournament_view.first_round(self.tournament.players_object, self.tournament.name)

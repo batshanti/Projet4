@@ -108,7 +108,7 @@ class Tournament:
             return int(round_number[6])
 
     def add_players(self, players):
-        """Add players in tournament and save"""
+        '''Add players in tournament and save.'''
         self.players = players
         self.players_object = Tournament.make_players_object(self.players)
         self.save_tournament(1)
