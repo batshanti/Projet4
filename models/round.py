@@ -22,7 +22,7 @@ class Round:
         ----------
         round_score : list
         contains result of 4 matches in a round.
-        
+                
         Returns
         -------
         list

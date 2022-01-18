@@ -56,6 +56,7 @@ class View:
 
     @staticmethod
     def home_page():
+        '''Display home page and return user choice to navigate.'''
         print("\n"*20)
         print(HOME_PIC_1 + HOME_PIC_2)
         for line in HOMEPAGE_MENU:
@@ -65,10 +66,18 @@ class View:
 
     @staticmethod
     def mess(number):
+        '''Print message.'''
         print(MESSAGES[number])
 
     @staticmethod
     def create_player_view():
+        """Get player information and return
+
+        Returns
+        -------
+        list
+            list contains player information
+        """
         name = input("Enter name :")
         first_name = input("Enter First Name :")
         birth_date = input("Enter birth date (Format : dd/mm/yy) :")
@@ -79,6 +88,7 @@ class View:
 
     @staticmethod
     def manage_player_view():
+        '''Display manage player menu and return user choice to navigate.'''
         for line in MANAGE_PLAYERS_MENU:
             print(line)
         choice = input("choose an action : ")
@@ -86,6 +96,20 @@ class View:
 
     @staticmethod
     def change_ranking_view(players):
+        '''Change player rank.
+        Display all players from database
+        Gat player number and new rank value
+
+        Parameters
+        ----------
+        players : list
+        list of all players from database.
+
+        Returns
+        -------
+        list
+            List contains number player and new rank    
+        '''
         title_all_p_rank = 'ALL PLAYERS BY RANK'
         data_r = [['ID', 'Name', 'Fist Name', 'Birth date', 'gender', 'Rank'], ]
         for line in players:
@@ -99,6 +123,7 @@ class View:
 
     @staticmethod
     def tournament_menu_view():
+        '''Display tournament menu and return user choice to navigate.'''
         for line in TOURNAMENT_MENU:
             print(line)
         choice = input("choose an action : ")
@@ -106,6 +131,13 @@ class View:
 
     @staticmethod
     def result(tournament):
+        """Display result of tournament
+        
+        Parameters
+        ----------
+        tournament : obj
+        tournament object
+        """
         players = tournament.sort_player_score()
         title = tournament.name
         data_result = [['#', 'Players', 'Score', 'Rank'], ]
@@ -121,6 +153,13 @@ class View:
 
     @staticmethod
     def create_tournament_view():
+        """Get tournament information and return.
+
+        Returns
+        -------
+        list
+            list contains tournament information.
+        """
         name = input("Enter name tournament: ")
         place = input("Enter place tournament: ")
         end_date = input("Enter end date  :")
@@ -130,18 +169,18 @@ class View:
 
     @staticmethod
     def choose_tournament_view():
+        '''Shows all tournament from database and return Doc.id tournament.'''
         Tournament.load_tournament_list()
         choice = int(input('choose tounament :'))
         return choice
 
     @staticmethod
-    def next_round():
-        print("Play next round ?")
-        next = input("1 > yes\n0 > return\n")
-        return next
-
-    @staticmethod
     def choice_player_tournament_view(all_players):
+        """choice players before register.
+        Display all players from database.
+        Get choose players.
+        Return this players in a list.
+        """
         list_player = []
         for line in all_players:
             print(line.doc_id, ' - ', line['name'], line['first_name'], line['birth_date'], line['rank'])
@@ -160,6 +199,7 @@ class View:
 
     @staticmethod
     def reports_menu():
+        '''Display reports menu and return user choice to navigate.'''
         print("\n"*20)
         for line in REPORTS_MENU:
             print(line)
@@ -168,6 +208,10 @@ class View:
 
     @staticmethod
     def all_players(players_name, players_rank):
+        """Display two tables of players.
+        First table with players sorted by Name.
+        Second table with player sorted by Rank.    
+        """
         title_all_p = 'ALL PLAYERS BY NAME'
         title_all_p_rank = 'ALL PLAYERS BY RANK'
         data_p = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'], ]
@@ -188,6 +232,10 @@ class View:
 
     @staticmethod
     def all_players_in_tournament(tournament):
+        """Display two tables of players for specific tournament.
+        First table with players sorted by Name.
+        Second table with player sorted by Rank.   
+        """
         title_all_p = "ALL PLAYERS IN TOURNAMENT BY NAME"
         title_all_p_rank = "ALL PLAYERS IN TOURNAMENT BY RANK"
         data_p = [['Name', 'Fist Name', 'Birth date', 'gender', 'Rank'], ]
@@ -210,6 +258,7 @@ class View:
 
     @staticmethod
     def all_tournaments(tournaments):
+        '''Display all tournament in database.'''
         title_tournament = "ALL TOURNAMENTS"
         data_t = [['Name', 'Place', 'Start', 'End', 'Players', 'Time control', 'Description'], ]
         for line in tournaments:
@@ -223,6 +272,7 @@ class View:
 
     @staticmethod
     def all_rounds(rounds, tournament):
+        '''Display all rounds from specific tournament.'''
         title_rounds = "ALL ROUNDS IN TOURNAMENT: " + tournament.name
         data_r = [['Round Name', 'Start date round', 'End date round', 'matches'], ]
         for line in rounds:
@@ -235,6 +285,7 @@ class View:
 
     @staticmethod
     def all_matches(rounds):
+        '''Display all matches from specific tournament.'''
         for round in rounds:
             data_r = [['Match', 'Player_1', 'Score', 'Player_2', 'Score'], ]
             title = round.round_name
@@ -246,7 +297,6 @@ class View:
                 r = match.rep()
                 r.insert(0, match_nb)
                 i.append(r)
-
             data_r.extend(i)
             table1 = SingleTable(data_r, title)
             print(table1.table)

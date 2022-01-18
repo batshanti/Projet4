@@ -14,8 +14,18 @@ class Tournament_controller:
         self.tournament.choice = choice
 
     def first(self):
-        """"""
-        self.play_tournament_view.players_tournament(self.tournament.sort_player_rank())
+        """Play the first round.
+        Ranks the players by their rank.
+        Get the results of the matches.
+        Create round obj with results of the matche.
+        Update the players score.
+        Save tournament.
+        Returns
+        -------
+        int
+            Retunr choice for playing new round or not.
+        """
+        self.tournament.sort_player_rank()
         start_time = time.strftime("%d/%m/%Y")+" "+time.strftime("%Hh%Mm%Ss")
         round_1_score = self.play_tournament_view.first_round(self.tournament.players_object, self.tournament.name)
         round_1 = Round("Round_1", start_time)
@@ -32,7 +42,20 @@ class Tournament_controller:
         return next
 
     def round(self):
+        """Play round
 
+        Determines the round to be played.
+        Ranks the players by their rank and score.
+        Get the results of the matches.
+        Create round object with results of the matche.
+        Update the players score.
+        Save tournament.
+        
+        Returns
+        -------
+        int
+            Retunr choice for playing new round or not.
+        """
         round_number = self.tournament.check_round() + 1
         round_name = "Round_"+str(round_number)
         start_time = time.strftime("%d/%m/%Y")+" "+time.strftime("%Hh%Mm%Ss")
@@ -59,6 +82,7 @@ class Tournament_controller:
             return next
 
     def check_players(self):
+        '''check if there are players in in self.tournament.players and return bool.'''
         if len(self.tournament.players) == 0:
             return False
         else:
@@ -66,6 +90,20 @@ class Tournament_controller:
 
     @staticmethod
     def update_score(players, score):
+        """Update the players score
+        
+        Parameters
+        ----------
+        players : list
+        list of player object
+        score : list
+        list result matches
+
+        Returns
+        -------
+        list
+            Return list of players object with new score  
+        """
         tab_score = [
             [score[0][0], score[0][1]],
             [score[0][2], score[0][3]],

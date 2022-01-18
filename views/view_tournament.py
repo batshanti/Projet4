@@ -5,11 +5,22 @@ class View_tournament:
 
         pass
 
-    def players_tournament(self, players):
-        for line in players:
-            print(line.name, line.rank)
-
     def first_round(self, players, tournament_name):
+        """Display matches and get result.
+        Show pairing players.
+        Get score from match.
+
+        Parameters
+        ----------
+        players : list
+        list contains players objects
+        tournament_name : str
+
+        Returns
+        -------
+        list
+            Contains all result matches for a round.
+        """
         print("=============== ", tournament_name.upper(), " ===================\n")
         print("ROUND 1\n")
         print("MATCH 1 : ", players[0].identity, "VS", players[4].identity)
@@ -29,6 +40,22 @@ class View_tournament:
         return [match_1, match_2, match_3, match_4]
 
     def round(self, players, tournament_name, round_name):
+        """Display matches and get result.
+        Show pairing players.
+        Get score from match.
+
+        Parameters
+        ----------
+        players : list
+        list contains players objects
+        tournament_name : str
+        round_name : str
+
+        Returns
+        -------
+        list
+            Contains all result matches for a round.
+        """
         print("=============== ", tournament_name.upper(), " ===================\n")
         print(round_name)
         print("MATCH 1 : ", players[0].identity, "VS", players[1].identity)
@@ -53,6 +80,7 @@ class View_tournament:
 
     @staticmethod
     def score_input(player_1, player_2):
+        '''Checks that the scores entered are 0, 0.5 or 1.'''
         print(player_1.identity, " VS ", player_2.identity)
         player_1_message = player_1.identity+" -> Enter score : "
         player_2_message = player_2.identity+" -> Enter score : "
