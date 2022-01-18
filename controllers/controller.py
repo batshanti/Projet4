@@ -187,7 +187,7 @@ class Controller:
     def result(tournament):
         '''Display result at the end of the tournament.'''
         View.result(tournament)
-        Controller.choose((MESSAGES['3'], [0]))
+        Controller.choose(MESSAGES['3'], [0])
         Controller.manage_tournament()
 
     @staticmethod

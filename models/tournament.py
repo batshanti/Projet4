@@ -113,7 +113,7 @@ class Tournament:
         self.players_object = Tournament.make_players_object(self.players)
         self.save_tournament(1)
 
-    def save_rep(self):
+    def info_rep(self):
         """Serialize tournament data player for reports
         Returns
         --------
