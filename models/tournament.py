@@ -37,10 +37,10 @@ class Tournament:
         self.tournament_query = Query()
 
     def save_tournament(self, choice=0):
-        '''Serialize tournament and save in database.
+        """Serialize tournament and save in database.
             "choice" argument : Save new tournamemt creation.
                                 Update an existing tournament.    
-        '''
+        """
         serialized_players = []
         for line in self.players_object:
             liste = {
@@ -86,7 +86,7 @@ class Tournament:
         return self.players_object
 
     def check_round(self):
-        '''Get all round in self.rounds and extract the nmber of the last round played'''
+        """Get all round in self.rounds and extract the nmber of the last round played"""
         if not self.rounds:
             return 0
         else:
@@ -97,13 +97,13 @@ class Tournament:
             return int(round_number[6])
 
     def add_players(self, players):
-        '''Add players in tournament and save'''
+        """Add players in tournament and save"""
         self.players = players
         self.players_object = Tournament.make_players_object(self.players)
         self.save_tournament(1)
 
     def save_rep(self):
-        '''Serialize tournament data player for reports'''
+        """Serialize tournament data player for reports"""
         list_players_name = ''
         for line in self.players_object:
             identity = line.identity
@@ -125,7 +125,7 @@ class Tournament:
 
     @staticmethod
     def get_tournament(choice):
-        '''Use doc.id element to get tournament information and return a tournament object'''
+        """Use doc.id element to get tournament information and return a tournament object"""
         tournament_info = tournament_table.get(doc_id=int(choice))
         name = tournament_info['name']
         place = tournament_info['place']
@@ -151,7 +151,7 @@ class Tournament:
 
     @staticmethod
     def make_players_object(players):
-        '''Return list of players object'''
+        """Return list of players object"""
         liste_p = []
         for line in players:
             player = Player(

@@ -12,7 +12,7 @@ class Match:
         return ([self.player1, self.score_p1], [self.player2, self.score_p2])
 
     def rep(self):
-        '''Return list of match information for reports'''
+        """Return list of match information for reports"""
         r = []
         r.extend([self.player1, self.score_p1, self.player2, self.score_p2])
         return r
