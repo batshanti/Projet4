@@ -16,4 +16,3 @@ class Match:
         r = []
         r.extend([self.player1, self.score_p1, self.player2, self.score_p2])
         return r
-

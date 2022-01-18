@@ -50,7 +50,7 @@ class Tournament_controller:
         Create round object with results of the matche.
         Update the players score.
         Save tournament.
-        
+
         Returns
         -------
         int
@@ -91,7 +91,7 @@ class Tournament_controller:
     @staticmethod
     def update_score(players, score):
         """Update the players score
-        
+
         Parameters
         ----------
         players : list
@@ -102,7 +102,7 @@ class Tournament_controller:
         Returns
         -------
         list
-            Return list of players object with new score  
+            Return list of players object with new score.
         """
         tab_score = [
             [score[0][0], score[0][1]],

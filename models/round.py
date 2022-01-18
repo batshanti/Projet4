@@ -16,13 +16,13 @@ class Round:
         self.matchs = matchs
 
     def save(self, round_score):
-        """Format round information to include it in save tournament. 
-        
+        """Format round information to include it in save tournament.
+
         Parameters
         ----------
         round_score : list
         contains result of 4 matches in a round.
-                
+
         Returns
         -------
         list

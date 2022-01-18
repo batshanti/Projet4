@@ -4,6 +4,7 @@ db = TinyDB("db.json")
 player_table = db.table("players")
 player_query = Query()
 
+
 class Player:
 
     def __init__(self, name="", first_name="", birth_date="", gender="", rank=None, score=None):
@@ -64,9 +65,9 @@ class Player:
     @staticmethod
     def get_players_by_id(id):
         """Get specific player from database and return player object.
-        
+
         Parameters
-        ----------    
+        ----------
         id : int
         Doc.id database value.
 
@@ -76,13 +77,12 @@ class Player:
             player object
         """
         p_info = player_table.get(doc_id=id)
-        return Player(p_info['name'],
-         p_info['first_name'], p_info['birth_date'], p_info['gender'], p_info['rank'])
+        return Player(p_info['name'], p_info['first_name'], p_info['birth_date'], p_info['gender'], p_info['rank'])
 
     @staticmethod
     def get_8_players(liste_id):
         """Get players informations from database with a doc.id's.
-        
+
         Parameters
         ----------
         liste_id : list

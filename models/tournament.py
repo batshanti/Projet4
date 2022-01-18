@@ -141,8 +141,7 @@ class Tournament:
 
     @staticmethod
     def get_tournament(choice):
-        """Use doc.id element to get tournament information and return a tournament object
-        
+        """Use doc.id element to get tournament information and return a tournament object.
         Parameters
         ----------
         choice : int
@@ -179,7 +178,7 @@ class Tournament:
     @staticmethod
     def make_players_object(players):
         """Make list of players object.
-        
+
         Parameters
         ----------
         players : list
@@ -208,4 +207,3 @@ class Tournament:
     def all_tournaments_database():
         tournaments = tournament_table.all()
         return tournaments
-

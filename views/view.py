@@ -108,7 +108,7 @@ class View:
         Returns
         -------
         list
-            List contains number player and new rank    
+            List contains number player and new rank.
         '''
         title_all_p_rank = 'ALL PLAYERS BY RANK'
         data_r = [['ID', 'Name', 'Fist Name', 'Birth date', 'gender', 'Rank'], ]
@@ -132,7 +132,7 @@ class View:
     @staticmethod
     def result(tournament):
         """Display result of tournament
-        
+
         Parameters
         ----------
         tournament : obj
@@ -210,7 +210,7 @@ class View:
     def all_players(players_name, players_rank):
         """Display two tables of players.
         First table with players sorted by Name.
-        Second table with player sorted by Rank.    
+        Second table with player sorted by Rank.
         """
         title_all_p = 'ALL PLAYERS BY NAME'
         title_all_p_rank = 'ALL PLAYERS BY RANK'
@@ -234,7 +234,7 @@ class View:
     def all_players_in_tournament(tournament):
         """Display two tables of players for specific tournament.
         First table with players sorted by Name.
-        Second table with player sorted by Rank.   
+        Second table with player sorted by Rank.
         """
         title_all_p = "ALL PLAYERS IN TOURNAMENT BY NAME"
         title_all_p_rank = "ALL PLAYERS IN TOURNAMENT BY RANK"
